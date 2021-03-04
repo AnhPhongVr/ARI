@@ -1,4 +1,4 @@
-# Reference document on ARI
+# Reference document on ARI
 
 
 ## General information on ROS

@@ -12,15 +12,15 @@ The distribution used for **ARI** is the *Melodic* one.
 
 ### ROS directory
 
-  The **ROS** directory can be found at *~/ari/src*, it is linked by **Catkin** and you will found every usefull files you need. It contains a **ROS [packages](http://wiki.ros.org/Packages)** which will allow you to easily work on **ARI** by having plenty of already functionnals tutorials. **This is where you will code**. You will find in the **Catkin** part of this document how to create your own package.
+  The **ROS** directory can be found at *~/ari/src*, it is linked by **Catkin** and you will found every usefull files you need. It contains a **ROS [packages](http://wiki.ros.org/Packages)** which will allow you to easily work on **ARI** by having plenty of already functionnals tutorials. **This is where you will code**. You will find in the **Catkin** part of this document the process to create your own package.
 
 ### Node / Topic concept
 
   It is the storage/communication part of the robot. This principle is **extremely important**. ROS works around topics that store the robot state. Each topic is assigned to a specific part of the robot (head, arm, ...) and the nodes have to write / read this informations in order to make the robot works via *publisher*/*subscriber* system.
       
-  [Nodes](http://wiki.ros.org/Nodes) : Thanks to **Catkin**, you can launch a **package** which will create a **node** from the source code contained in it.
+  [Nodes](http://wiki.ros.org/Nodes) : A node is an executable binary contained in a **package**.
   
-  [Topics](http://wiki.ros.org/Topics) : This is where **nodes** find informations about the state of **ARI** (camera, motors, etc.). A **node** has to *subscribe* to every topics it wants to read and to *publish* ti every topics it wantes to write. The command [rostopic](http://wiki.ros.org/rostopic) will help you to find topics you will need for your code.
+  [Topics](http://wiki.ros.org/Topics) : This is where **nodes** find informations about the state of **ARI** (camera, motors, etc.). A **node** has to *subscribe* to every topics it wants to read and to *publish* to every topics it wants to write. The command [rostopic](http://wiki.ros.org/rostopic) will help you to find topics you will need for your code.
   
   A node can *subscribe* to several topics. Several nodes can *publish* the same topic.
 
@@ -31,6 +31,7 @@ The distribution used for **ARI** is the *Melodic* one.
 | Head Camera  |                   |             |
 | Torso camera |                   |             |
 | Rear camera  |                   |             |
+| Torso screen |                   |             |
 | Speakers     |                   |             |
 | Microphones  |                   |             |
 | Arms         |                   |             |

@@ -8,7 +8,7 @@
 
 ### Distribution
 
-The distribution used for **ARI** is the *Melodic* one. The installation process can be found [here](http://wiki.ros.org/melodic/Installation/Ubuntu).
+The distribution used for **ARI** is the *Melodic* one.
 
 ### ROS directory
 

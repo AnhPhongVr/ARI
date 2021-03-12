@@ -79,6 +79,11 @@
     $ rosnode ping [node_name]
     ```
 
+* Kills a node
+    ```bash
+    $ rosnode kill [node_name]
+    ```
+
 * Starts nodes as defined in a launch file
     ```bash
     $ roslaunch [package] [filename.launch]

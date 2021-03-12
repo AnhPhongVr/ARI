@@ -137,6 +137,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(run_dab src/move/run_dab_v1.cpp)
+add_executable(run_default_position src/move/run_default_position.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -150,6 +151,7 @@ add_executable(run_dab src/move/run_dab_v1.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(run_dab ${catkin_LIBRARIES})
+target_link_libraries(run_default_position ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -173,7 +175,7 @@ target_link_libraries(run_dab ${catkin_LIBRARIES})
 
 ## Mark libraries for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
-install(TARGETS run_dab
+install(TARGETS run_dab run_default_position
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}

@@ -87,7 +87,7 @@ void waypoints_right_arm_goal(control_msgs::FollowJointTrajectoryGoal& goal)
 
 
   // Two waypoints in this goal trajectory
-  goal.trajectory.points.resize(2);
+  goal.trajectory.points.resize(1);
 
   // First trajectory point
   // Positions
@@ -105,23 +105,6 @@ void waypoints_right_arm_goal(control_msgs::FollowJointTrajectoryGoal& goal)
   }
   // To be reached 3 second after starting along the trajectory
   goal.trajectory.points[index].time_from_start = ros::Duration(3.0);
-
-  // Second trajectory point
-  // Positions
-  index += 1;
-  goal.trajectory.points[index].positions.resize(4);
-  goal.trajectory.points[index].positions[0] = -0.24;
-  goal.trajectory.points[index].positions[1] = 1.79;
-  goal.trajectory.points[index].positions[2] = 0.49;
-  goal.trajectory.points[index].positions[3] = 0;
-  // Velocities
-  goal.trajectory.points[index].velocities.resize(4);
-  for (int j = 0; j < 4; ++j)
-  {
-    goal.trajectory.points[index].velocities[j] = 0.0;
-  }
-  // To be reached 6 seconds after starting along the trajectory
-  goal.trajectory.points[index].time_from_start = ros::Duration(6.0);
 }
 
 // Generates a simple trajectory with two waypoints to move ARI's arm 
@@ -135,7 +118,7 @@ void waypoints_left_arm_goal(control_msgs::FollowJointTrajectoryGoal& goal)
 
 
   // Two waypoints in this goal trajectory
-  goal.trajectory.points.resize(2);
+  goal.trajectory.points.resize(1);
 
   // First trajectory point
   // Positions
@@ -153,23 +136,6 @@ void waypoints_left_arm_goal(control_msgs::FollowJointTrajectoryGoal& goal)
   }
   // To be reached 3 second after starting along the trajectory
   goal.trajectory.points[index].time_from_start = ros::Duration(3.0);
-
-  // Second trajectory point
-  // Positions
-  index += 1;
-  goal.trajectory.points[index].positions.resize(4);
-  goal.trajectory.points[index].positions[0] = 1.90;
-  goal.trajectory.points[index].positions[1] = 0;
-  goal.trajectory.points[index].positions[2] = -1.50;
-  goal.trajectory.points[index].positions[3] = 1.55;
-  // Velocities
-  goal.trajectory.points[index].velocities.resize(4);
-  for (int j = 0; j < 4; ++j)
-  {
-    goal.trajectory.points[index].velocities[j] = 0.0;
-  }
-  // To be reached 6 seconds after starting along the trajectory
-  goal.trajectory.points[index].time_from_start = ros::Duration(6.0);
 }
 
 // Generates a simple trajectory with two waypoints to move ARI's arm 
@@ -180,7 +146,7 @@ void waypoints_head_goal(control_msgs::FollowJointTrajectoryGoal& goal)
   goal.trajectory.joint_names.push_back("head_2_joint");
 
   // Two waypoints in this goal trajectory
-  goal.trajectory.points.resize(2);
+  goal.trajectory.points.resize(1);
 
   // First trajectory point
   // Positions
@@ -197,22 +163,6 @@ void waypoints_head_goal(control_msgs::FollowJointTrajectoryGoal& goal)
   }
   // To be reached 3 second after starting along the trajectory
   goal.trajectory.points[index].time_from_start = ros::Duration(3.0);
-
-  // Second trajectory point
-  // Positions
-  index += 1;
-  goal.trajectory.points[index].positions.resize(2);
-  goal.trajectory.points[index].positions[0] = 0;
-  goal.trajectory.points[index].positions[1] = 0.37;
-
-  // Velocities
-  goal.trajectory.points[index].velocities.resize(2);
-  for (int j = 0; j < 2; ++j)
-  {
-    goal.trajectory.points[index].velocities[j] = 0.0;
-  }
-  // To be reached 6 seconds after starting along the trajectory
-  goal.trajectory.points[index].time_from_start = ros::Duration(6.0);
 }
 
 
@@ -220,7 +170,7 @@ void waypoints_head_goal(control_msgs::FollowJointTrajectoryGoal& goal)
 int main(int argc, char** argv)
 {
   // Init the ROS node
-  ros::init(argc, argv, "run_dab");
+  ros::init(argc, argv, "run_dafault_position");
 
   ROS_INFO("Starting run_dab application ...");
  

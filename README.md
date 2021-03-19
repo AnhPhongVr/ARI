@@ -59,7 +59,7 @@ The distribution used for **ARI** is the *Melodic* one.
 
 * [Cheat Sheet ROS](resources/CHEATSHEET.md)
 
-Add here links to the cheat sheet and any other `.md` file that will be created in this repository.
+* [Steps](resources/STEPS.md)
 
 ## Versionning
 

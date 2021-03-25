@@ -20,12 +20,12 @@ int main(int argc, char **argv) {
   //Loops at a desired frequency in hz
   ros::Rate loop_rate(10);
 
-  while(ros::ok()) {
+  for (int i = 0; i < 10 && ros::ok(); i++) {
     // Prepare data to send to topic
     geometry_msgs::Twist twist;
 
     geometry_msgs::Vector3 vector_linear;
-    vector_linear.x = 0.5;
+    vector_linear.x = 0.2;
     vector_linear.y = 0.0;
     vector_linear.z = 0.0;
 
@@ -47,5 +47,3 @@ int main(int argc, char **argv) {
 
   return 0;
 }
-
-// you are a wizard Harry

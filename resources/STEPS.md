@@ -32,14 +32,20 @@
     ```
 
 * Kill conflicting node<br>
-    On the ARI robot the node ??? is continuously running, it moves the arms <br>
+    On the ARI robot the node /play_motion is continuously running, it moves the arms <br>
     This node  may conflict with the nodes we are going to launch, it is better to kill it <br>
     ```bash
-    $ rosnode kill ???
+    $ rosnode kill /play_motion
     ```
 
 * Run node on ARI <br>
-    To run a node on ARI use this command <br>
+    * To run a node with python script on ARI use this command <br>
+    ```bash
+    $ roscd [package_name]/scripts
+    $ chmod +x [script_name].py 
+    $ rosrun [package_name] [node_name].py
+    ```
+    * To run a node with c++ code on ARI use this command <br>
     ```bash
     $ rosrun [package_name] [node_name]
     ```

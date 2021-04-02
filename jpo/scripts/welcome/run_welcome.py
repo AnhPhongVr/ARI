@@ -1,31 +1,77 @@
 #!/usr/bin/env python
+
 import rospy
 from pal_detection_msgs.msg import Detections2d
-from std_msgs.msg import String
+from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
+
+detection_number = 0
 
 def callback(data):
-    if (len(data.detections) > 0):
-        rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.detections[0])
-        coucou()
+    global detection_number 
 
+    if (detection_number == 0 and len(data.detections) > 0 ):
+        rospy.loginfo("A new person is here!")
+        try:
+            wave()
+            say_hello()
+        except rospy.ROSInterruptException:
+            pass
 
-def coucou():
-    rospy.loginfo('Hello')
+    detection_number = len(data.detections)  
 
-def listener():
+def wave():
+    rospy.loginfo('Ari is waving his hand')
 
-    # In ROS, nodes are uniquely named. If two nodes with the same
-    # name are launched, the previous one is kicked off. The
-    # anonymous=True flag means that rospy will choose a unique
-    # name for our 'listener' node so that multiple listeners can
-    # run simultaneously.
+    pub = rospy.Publisher('/arm_left_controller/command', JointTrajectory, queue_size=10)
+
+    rate = rospy.Rate(10) # 10hz
+
+    if not rospy.is_shutdown():
+        hello_str = "hello world %s" % rospy.get_time()
+        rospy.loginfo(hello_str)
+
+        points_first_move = JointTrajectoryPoint()
+        points_first_move.positions = [0, 0, 0, 0]
+        points_first_move.velocities = [0.1, 0.1, 0.1, 0.1]
+        points_first_move.time_from_start = rospy.Duration(3)
+
+        points_second_move = JointTrajectoryPoint()
+        points_second_move.positions = [-0.24, 1.79, 0.49, 0]
+        points_second_move.velocities = [0.1, 0.1, 0.1, 0.1]
+        points_second_move.time_from_start = rospy.Duration(6)
+
+        first_move = JointTrajectory()
+        #first_move.header = 
+        first_move.joint_names = ["arm_left_1_joint", "arm_left_2_joint", "arm_left_3_joint", "arm_left_4_joint"]
+        first_move.points = [points_first_move, points_second_move]
+
+        pub.publish(first_move)
+        #rospy.Duration(3)
+        rate.sleep()
+
+def say_hello():
+    rospy.loginfo('Ari is saying hello')
+
+def main():
     rospy.init_node('run_welcome', anonymous=True)
     rospy.loginfo('Created node run_welcome')
 
     rospy.Subscriber('/person_detector/detections', Detections2d, callback)
-
-    # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
 
 if __name__ == '__main__':
-    listener()
+    main()
+
+'''
+Position 1
+1.50
+1.50
+0.00
+2.29
+
+Position 2
+1.50
+1.50
+0.00
+1.40
+'''

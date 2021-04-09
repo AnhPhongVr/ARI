@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
+import sys
 import rospy
+import roslaunch
 from pal_detection_msgs.msg import Detections2d
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
@@ -56,6 +58,17 @@ def main():
     rospy.init_node('run_welcome', anonymous=True)
     rospy.loginfo('Created node run_welcome')
 
+    """
+    string_path = sys.argv[0]
+    uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
+    cli_args = ['/pal_person_detector_opencv/launch/detector.launch','image:=/head_front_camera/image_raw']
+    roslaunch_args = cli_args[1:]
+    roslaunch_file = [(roslaunch.rlutil.resolve_launch_arguments(cli_args)[0], roslaunch_args)]
+    parent = roslaunch.parent.ROSLaunchParent(uuid, roslaunch_file)
+    parent.start()
+    rospy.loginfo("Started launch file")
+    """
+
     rospy.Subscriber('/person_detector/detections', Detections2d, callback)
     rospy.spin()
 
@@ -74,4 +87,6 @@ Position 2
 1.50
 0.00
 1.40
+
+roslaunch pal_person_detector_opencv detector.launch image:=/head_front_camera/image_raw
 '''

@@ -159,7 +159,11 @@ install(PROGRAMS
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-catkin_install_python(PROGRAMS scripts/welcome/run_welcome.py scripts/welcome/run_welcome.py
+catkin_install_python(PROGRAMS scripts/welcome/run_welcome.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS scripts/welcome/run_welcome_person.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

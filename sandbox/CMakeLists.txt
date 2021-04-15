@@ -159,6 +159,10 @@ target_link_libraries(run_forward ${catkin_LIBRARIES})
 ## Install ##
 #############
 
+catkin_install_python(PROGRAMS scripts/move/run_joy_ari.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 

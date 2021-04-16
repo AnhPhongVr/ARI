@@ -13,20 +13,25 @@ def wave_client():
     client_arm.wait_for_server(rospy.Duration(2))
 
     #if not rospy.is_shutdown():
-
     goal = FollowJointTrajectoryGoal()
     goal.trajectory.joint_names = ["arm_left_1_joint", "arm_left_2_joint", "arm_left_3_joint", "arm_left_4_joint"]
     goal.trajectory.header.stamp = rospy.Time.now() + rospy.Duration(1)
 
     # First position
-    goal.trajectory.points.append(JointTrajectoryPoint(positions=[0.0, 0.0, 0.0, 0.0], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(3)))
+    goal.trajectory.points.append(JointTrajectoryPoint(positions=[1.49, 1.50, 0.0, 2.29], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(2)))
 
     # Second position
-    goal.trajectory.points.append(JointTrajectoryPoint(positions=[1, 1, 1, 1], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(6)))
+    goal.trajectory.points.append(JointTrajectoryPoint(positions=[1.50, 1.50, 0.0, 1.40], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(4)))
 
-    # third position
-    goal.trajectory.points.append(JointTrajectoryPoint(positions=[0.0, 0.0, 0.0, 0.0], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(9)))
-   
+    # Third position
+    goal.trajectory.points.append(JointTrajectoryPoint(positions=[1.50, 1.50, 0.0, 2.29], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(6)))
+
+    # Fourth position
+    goal.trajectory.points.append(JointTrajectoryPoint(positions=[1.50, 1.50, 0.0, 1.40], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(8)))
+
+    # Fifth position
+    goal.trajectory.points.append(JointTrajectoryPoint(positions=[0.0, 0.0, 0.0, 0.0], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(10)))
+
     # Send the goal and wait
     client_arm.send_goal(goal)
     return client_arm

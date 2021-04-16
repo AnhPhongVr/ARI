@@ -1,14 +1,21 @@
 #!/usr/bin/env python
 
 import rospy
-from actionlib import SimpleActionClient
+#from actionlib import SimpleActionClient
+#from actionlib_msgs.msg import GoalStatus
 from sensor_msgs.msg import Joy
+from geometry_msgs.msg import Twist, Vector3
 
 def callback(data):
     listButtons = detectPushedButton(data)
     mkStringMessage = ', '.join(listButtons)
     
     rospy.loginfo("You pressed buttons " + mkStringMessage)
+
+    try:
+        #move_base()
+    except rospy.ROSInterruptException:
+        pass
 
 def detectPushedButton(data):
     listButtons = []
@@ -34,6 +41,21 @@ def detectPushedButton(data):
     if (data.axes[5] != 0): listButtons.append("cross key up/down")
 
     return listButtons 
+
+def move_base():
+    rospy.loginfo('%s Ari is moving' % rospy.get_time())
+
+    pub_base = rospy.Publisher('/mobile_base_controller/cmd_vel', Twist, queue_size=10)
+    
+    rate = rospy.Rate(10) # 10hz
+
+    while not rospy.is_shutdown():
+        twist_command = Twist()
+        twist_command.angular = Vector3(x=0,2, y=0.0, z=0.0)
+        twist_command.linear = Vector3(x=0.0, y=0.0, z=0.0)
+
+        pub_base.publish(twist_command)
+        rate.sleep()
 
 def main():
     rospy.init_node('run_joy_ari', anonymous=True)

@@ -3,7 +3,6 @@
 import sys
 
 import rospy
-import roslaunch
 from actionlib import SimpleActionClient
 from actionlib_msgs.msg import GoalStatus
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint

@@ -13,7 +13,8 @@ def callback(data):
     rospy.loginfo("You pressed buttons " + mkStringMessage)
 
     try:
-        #move_base()
+        #rospy.loginfo("action")
+        #move_base(data)
     except rospy.ROSInterruptException:
         pass
 
@@ -42,7 +43,7 @@ def detectPushedButton(data):
 
     return listButtons 
 
-def move_base():
+def move_base(joy_data):
     rospy.loginfo('%s Ari is moving' % rospy.get_time())
 
     pub_base = rospy.Publisher('/mobile_base_controller/cmd_vel', Twist, queue_size=10)
@@ -50,11 +51,13 @@ def move_base():
     rate = rospy.Rate(10) # 10hz
 
     while not rospy.is_shutdown():
-        twist_command = Twist()
-        twist_command.angular = Vector3(x=0,2, y=0.0, z=0.0)
-        twist_command.linear = Vector3(x=0.0, y=0.0, z=0.0)
+        if (data.buttons[0] != 0): 
+            rospy.loginfo('%s Ari is moving forward' % rospy.get_time())
+            twist_command = Twist()
+            twist_command.angular = Vector3(x = 0.2, y = 0.0, z = 0.0)
+            twist_command.linear = Vector3(x = 0.0, y = 0.0, z = 0.0)
 
-        pub_base.publish(twist_command)
+            pub_base.publish(twist_command)
         rate.sleep()
 
 def main():

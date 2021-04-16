@@ -6,8 +6,8 @@ from actionlib_msgs.msg import GoalStatus
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from control_msgs.msg import FollowJointTrajectoryAction, FollowJointTrajectoryGoal
 
-def wave_client():
-    rospy.loginfo('%s Ari is waving his hand' % rospy.get_time())
+def shaking_hands_client():
+    rospy.loginfo('%s Ari is shaking his hand' % rospy.get_time())
 
     client_arm = SimpleActionClient('/arm_left_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
     client_arm.wait_for_server(rospy.Duration(2))
@@ -32,10 +32,10 @@ def wave_client():
     return client_arm
 
 def main():
-    rospy.init_node('run_wave', anonymous=True)
-    rospy.loginfo('Created node run_wave')
+    rospy.init_node('run_shaking_hands', anonymous=True)
+    rospy.loginfo('Created node run_shaking_hands')
 
-    goal_hand = wave_client()
+    goal_hand = shaking_hands_client()
     status = goal_hand.get_state()
 
     try:

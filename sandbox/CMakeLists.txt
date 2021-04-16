@@ -163,6 +163,14 @@ catkin_install_python(PROGRAMS scripts/move/run_wave.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+catkin_install_python(PROGRAMS scripts/move/run_shaking_hands.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS scripts/welcome/run_welcome.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 

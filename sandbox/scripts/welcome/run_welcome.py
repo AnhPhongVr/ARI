@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+"""
+NOT FINISHED
+Not an interesting way to use rather SimpleActionClient Lib
+See in jpo/scripts/welcome/run_welcome_person.py
+"""
+
 import sys
 import rospy
 import roslaunch

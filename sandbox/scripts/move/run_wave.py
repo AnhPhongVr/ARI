@@ -18,7 +18,7 @@ def wave_client():
     goal.trajectory.header.stamp = rospy.Time.now() + rospy.Duration(1)
 
     # First position
-    goal.trajectory.points.append(JointTrajectoryPoint(positions=[1.49, 1.50, 0.0, 2.29], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(2)))
+    goal.trajectory.points.append(JointTrajectoryPoint(positions=[1.50, 1.50, 0.0, 2.29], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(2)))
 
     # Second position
     goal.trajectory.points.append(JointTrajectoryPoint(positions=[1.50, 1.50, 0.0, 1.40], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(4)))

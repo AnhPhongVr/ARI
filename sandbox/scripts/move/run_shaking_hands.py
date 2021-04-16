@@ -18,6 +18,7 @@ def shaking_hands_client():
     goal.trajectory.joint_names = ["arm_left_1_joint", "arm_left_2_joint", "arm_left_3_joint", "arm_left_4_joint"]
     goal.trajectory.header.stamp = rospy.Time.now() + rospy.Duration(1)
 
+    # TODO : Find the positions rqt_joint_trajectory_controller
     # First position
     goal.trajectory.points.append(JointTrajectoryPoint(positions=[0.0, 0.0, 0.0, 0.0], velocities = [0.1, 0.1, 0.1, 0.1], time_from_start = rospy.Duration(3)))
 

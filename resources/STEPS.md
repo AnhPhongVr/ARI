@@ -11,7 +11,7 @@
 * Connect your pc to ARI with SSH <br>
     To ssh on ARI use this command <br>
     ```bash
-    $ ssh pal@10.68.0.1
+    $ ssh 10.68.0.1 -y
     ```
     Place your working directory in the "ari_public_ws" folder <br>
 

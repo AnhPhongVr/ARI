@@ -38,4 +38,5 @@
 - git: {local-name: realsense,                    uri: 'https://github.com/pal-robotics-forks/realsense.git', version: 'melodic-devel'}
 - git: {local-name: pal_navigation_cfg_public,    uri: 'https://github.com/pal-robotics/pal_navigation_cfg_public.git', version: 'master'}
 - git: {local-name: pal_person_detector_opencv,    uri: 'https://github.com/pal-robotics/pal_person_detector_opencv.git', version: 'master'}
-- git: {local-name: ari_isep,    uri: 'https://github.com/DaSSIP-IHM/ARI.git', version: 'master'}
+- git: {local-name: pal_face_detector_opencv,     uri: 'https://github.com/pal-robotics/pal_face_detector_opencv.git', version: 'hydro-devel'}
+- git: {local-name: ari_isep,                     uri: 'https://github.com/DaSSIP-IHM/ARI.git', version: 'master'}

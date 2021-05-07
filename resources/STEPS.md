@@ -4,23 +4,27 @@
 
 ## Build package
 
-* First of all, source your setup.
-  Be careful to be in the ari workspace
+* First of all, source your setup.<br>
+  Be careful to be in the ari workspace<br>
   ```source ./devel/setup.bash```
 
-* Then, use catkin to update ros executable files
-  Be careful to be in the ari workspace
-  ```catkin_make```
+* Then, use catkin to update ros executable files<br>
+  Be careful to be in the ari workspace <br>
+  ```catkin build```<br>
+  If you know what you have to build because everything else is already built, then use this command<br>
+  ```catkin build package_name```
 
 ## Run on Gazebo
 
-* Launch Gazebo with the command below
+* Launch Gazebo with the command below <br>
   ```roslaunch ari_gazebo ari_gazebo.launch public_sim:=true```
   
-* Launch the executable you need to
-  You need to know the executable name and the package where the executable is
-  Be aware that if you type the extenstion (for instance .py), it won't work
-  ```roslaunch package_name executable_name```
+* chmod +x
+
+* Launch the executable you need to <br>
+  You need to know the executable name and the package where the executable is <br>
+  Be aware that you have to type the extension '.py' for python files and not for c++ files <br>
+  ```roslaunch package_name script_name```
 
 ## Run on ARI
 

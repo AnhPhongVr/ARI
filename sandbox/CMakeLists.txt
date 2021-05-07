@@ -57,11 +57,19 @@ target_link_libraries(run_forward ${catkin_LIBRARIES})
 ## Install ##
 #############
 
-catkin_install_python(PROGRAMS scripts/move/run_joy_ari.py
+catkin_install_python(PROGRAMS scripts/move/run_wave.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-catkin_install_python(PROGRAMS scripts/move/run_control_ari.py
+catkin_install_python(PROGRAMS scripts/move/run_shaking_hands.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS scripts/joy/run_joy_ari.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS scripts/welcome/run_welcome.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

@@ -162,6 +162,10 @@ catkin_install_python(PROGRAMS scripts/welcome/run_welcome_face.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+catkin_install_python(PROGRAMS scripts/control/ari_with_controller.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 

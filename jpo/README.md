@@ -4,6 +4,20 @@ In this file you will find all the instructions to run easly all the code <br>
 
 ## scripts folder
 
+### control/ari_with_controller.py
+
+On Ari you will do this instructions to run the program : <br>
+
+* Run this command to see the joy topic and verify that the controller is on <br>
+    ```bash
+    $ rostopic echo joy
+    ```
+
+* Run this command to launch the code <br>
+    ```bash
+    $ rosrun jpo ari_with_contoller.py
+    ```
+
 ### welcome/run_welcome_person.py
 
 On Ari you will do this instructions to run the program : <br>

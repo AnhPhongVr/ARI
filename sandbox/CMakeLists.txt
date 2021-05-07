@@ -65,24 +65,11 @@ catkin_install_python(PROGRAMS scripts/move/run_shaking_hands.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+catkin_install_python(PROGRAMS scripts/joy/run_joy_ari.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 catkin_install_python(PROGRAMS scripts/welcome/run_welcome.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
-# all install targets should use catkin DESTINATION variables
-# See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
-
-## Mark executable scripts (Python etc.) for installation
-## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
-catkin_install_python(PROGRAMS scripts/move/run_joy_ari.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
-catkin_install_python(PROGRAMS scripts/move/run_control_ari.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

@@ -1,8 +1,28 @@
 # Steps
 
-##
+## Create a package
 
-## ARI side
+## Build package
+
+* First of all, source your setup.
+  Be careful to be in the ari workspace
+  ```source ./devel/setup.bash```
+
+* Then, use catkin to update ros executable files
+  Be careful to be in the ari workspace
+  ```catkin_make```
+
+## Run on Gazebo
+
+* Launch Gazebo with the command below
+  ```roslaunch ari_gazebo ari_gazebo.launch public_sim:=true```
+  
+* Launch the executable you need to
+  You need to know the executable name and the package where the executable is
+  Be aware that if you type the extenstion (for instance .py), it won't work
+  ```roslaunch package_name executable_name```
+
+## Run on ARI
 
 * Use a FTP (File transfer Protocol) to deploy packages <br>
     In our case we use FileZilla because it's free and user friendly <br>

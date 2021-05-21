@@ -111,10 +111,10 @@ void waypoints_right_arm_goal(control_msgs::FollowJointTrajectoryGoal& goal)
 void waypoints_left_arm_goal(control_msgs::FollowJointTrajectoryGoal& goal)
 {
   // The joint names, which apply to all waypoints
-  goal.trajectory.joint_names.push_back("arm_left_1_joint"); // Joing at the shoulder, controls movement on the vertical axis
-  goal.trajectory.joint_names.push_back("arm_left_2_joint"); // Joing at the shoulder, controls movement on the horizontal axis
-  goal.trajectory.joint_names.push_back("arm_left_3_joint"); // Joing at the elbow, controls movement on the vertical axis
-  goal.trajectory.joint_names.push_back("arm_left_4_joint"); // Joing at the elbow, controls movement on the horizontal axis
+  goal.trajectory.joint_names.push_back("arm_left_1_joint"); // Joint at the shoulder, controls movement on the vertical axis
+  goal.trajectory.joint_names.push_back("arm_left_2_joint"); // Joint at the shoulder, controls movement on the horizontal axis
+  goal.trajectory.joint_names.push_back("arm_left_3_joint"); // Joint at the elbow, controls movement on the vertical axis
+  goal.trajectory.joint_names.push_back("arm_left_4_joint"); // Joint at the elbow, controls movement on the horizontal axis
 
 
   // Two waypoints in this goal trajectory

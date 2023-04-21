@@ -62,8 +62,8 @@ def move_base(joy_data):
             rate.sleep() 
 
 def main():
-    rospy.init_node('run_control_ari', anonymous=True)
-    rospy.loginfo('Created node run_control_ari')
+    rospy.init_node('ari_with_controller', anonymous=True)
+    rospy.loginfo('Created node ari_with_controller')
 
     rospy.Subscriber('/joy', Joy, callback)
     rospy.spin()

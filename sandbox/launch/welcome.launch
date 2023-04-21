@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="sandbox" type="run_forward" name="run_forward" output="screen"/>
+  <node pkg="sandbox" type="say.py" name="say" output="screen"/>
+</launch>
+

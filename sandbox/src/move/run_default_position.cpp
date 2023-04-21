@@ -111,10 +111,10 @@ void waypoints_right_arm_goal(control_msgs::FollowJointTrajectoryGoal& goal)
 void waypoints_left_arm_goal(control_msgs::FollowJointTrajectoryGoal& goal)
 {
   // The joint names, which apply to all waypoints
-  goal.trajectory.joint_names.push_back("arm_left_1_joint");
-  goal.trajectory.joint_names.push_back("arm_left_2_joint");
-  goal.trajectory.joint_names.push_back("arm_left_3_joint");
-  goal.trajectory.joint_names.push_back("arm_left_4_joint");
+  goal.trajectory.joint_names.push_back("arm_left_1_joint"); // Joint at the shoulder, controls movement on the vertical axis
+  goal.trajectory.joint_names.push_back("arm_left_2_joint"); // Joint at the shoulder, controls movement on the horizontal axis
+  goal.trajectory.joint_names.push_back("arm_left_3_joint"); // Joint at the elbow, controls movement on the vertical axis
+  goal.trajectory.joint_names.push_back("arm_left_4_joint"); // Joint at the elbow, controls movement on the horizontal axis
 
 
   // Two waypoints in this goal trajectory
@@ -132,7 +132,12 @@ void waypoints_left_arm_goal(control_msgs::FollowJointTrajectoryGoal& goal)
   goal.trajectory.points[index].velocities.resize(4);
   for (int j = 0; j < 4; ++j)
   {
-    goal.trajectory.points[index].velocities[j] = 1.0;
+    if (j != 0) {
+      goal.trajectory.points[index].velocities[j] = 1.0;
+    }
+    else {
+      goal.trajectory.points[index].velocities[j] = 0.5;
+    }
   }
   // To be reached 3 second after starting along the trajectory
   goal.trajectory.points[index].time_from_start = ros::Duration(3.0);

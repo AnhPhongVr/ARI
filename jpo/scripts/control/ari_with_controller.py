@@ -49,17 +49,19 @@ def move_base(joy_data):
     linear = joy_data.axes[1] / 4
     angular = joy_data.axes[2] / 4
     
-    if (linear] != 0 or angular != 0): # Left stick, right stick
-        
-        for x in range(10):
-            rospy.loginfo('%s Ari is moving' % rospy.get_time())
-            twist_command = Twist()
-            twist_command.angular = Vector3(x = linear, y = 0.0, z = 0.0)
-            twist_command.linear = Vector3(x = 0.5, y = 0.0, z = angular)
+    if (linear != 0 or angular != 0): # Left stick, right stick
 
-            pub_base.publish(twist_command)
-            #rospy.spin()
-            rate.sleep() 
+        rospy.loginfo('Linear : %s', linear)
+        rospy.loginfo('Angular : %s', angular)
+        rospy.loginfo('%s Ari is moving' % rospy.get_time())
+        
+        twist_command = Twist()
+        twist_command.linear = Vector3(x = linear, y = 0.0, z = 0.0)
+        twist_command.angular = Vector3(x = 0.0, y = 0.0, z = angular)
+
+        pub_base.publish(twist_command)
+        #rospy.spin()
+        rate.sleep() 
 
 def main():
     rospy.init_node('ari_with_controller', anonymous=True)

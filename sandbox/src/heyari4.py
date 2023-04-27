@@ -3,13 +3,12 @@
 import rospy
 import os
 from std_msgs.msg import String
-import speech_recognition as sr
 from pal_interaction_msgs.msg import TtsAction, TtsGoal
 from actionlib import SimpleActionClient
-import openai
-import requests
+# import openai
 import re
-
+# from kaldi_decoder import KaldiDecoder # Importer la classe KaldiDecoder
+from kaldiasr.nnet3 import KaldiNNet3OnlineModel, KaldiNNet3OnlineDecoder
 # Initialisation du noeud ROS
 rospy.init_node('voice_control', anonymous=True)
 
@@ -17,8 +16,12 @@ rospy.init_node('voice_control', anonymous=True)
 client = SimpleActionClient('/tts', TtsAction)
 client.wait_for_server()
 
+MODELDIR = 'data/models/kaldi-generic-en-tdnn_sp-latest'
+kaldi_model = KaldiNNet3OnlineModel (MODELDIR)
+decoder = KaldiNNet3OnlineDecoder (kaldi_model)
+
 # Configuration de l'API OpenAI
-openai.api_key = "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" # Mettre votre clé API ici
+# openai.api_key = "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" # Mettre votre clé API ici
 
 def text_to_speech(text):
     # Création de l'objectif TTS pour dire notre phrase
@@ -26,13 +29,6 @@ def text_to_speech(text):
     goal.rawtext.text = text
     goal.rawtext.lang_id = "en_GB"
     client.send_goal_and_wait(goal)
-
-def record_audio():
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        r.adjust_for_ambient_noise(source)
-        audio = r.listen(source)
-    return audio
 
 
 def generate_completion(prompt):
@@ -55,8 +51,21 @@ def generate_completion(prompt):
 
     return message
 
+def speech_to_text(audio_file):
+    # Initialisation du décodeur Kaldi
+    decoder = KaldiNNet3OnlineDecoder (kaldi_model)
+
+    # Transcription de la parole en texte à l'aide de PyKaldi
+    text = decoder.decode_wav(audio_file)
+
+    return text
+
 def voice_control():
     global client
+
+    # Configuration du module Kaldi
+    r = sr.Recognizer()
+    r.energy_threshold = 4000
 
     # Message à dire pour indiquer que le robot écoute
     text_to_speech("Hey, how can I help you?")
@@ -66,8 +75,16 @@ def voice_control():
         # Enregistrement audio de l'utilisateur
         audio_file = record_audio()
 
-        # Transcription de la parole en texte
-        text = speech_to_text(audio_file)
+        # Transcription de la parole en texte avec Kaldi
+        with sr.AudioFile(audio_file) as source:
+            audio = r.record(source)
+        try:
+            text = r.recognize_kaldi(audio)
+        except sr.UnknownValueError:
+            text = ""
+        except sr.RequestError as e:
+            rospy.logerr("Kaldi error; {0}".format(e))
+            text = ""
 
         # On affiche la phrase entendue
         rospy.loginfo("I heard: " + text)
@@ -81,8 +98,16 @@ def voice_control():
                 # Enregistrement audio de l'utilisateur
                 audio_file = record_audio()
 
-                # Transcription de la parole en texte
-                text = speech_to_text(audio_file)
+                # Transcription de la parole en texte avec Kaldi
+                with sr.AudioFile(audio_file) as source:
+                    audio = r.record(source)
+                try:
+                    text = r.recognize_kaldi(audio)
+                except sr.UnknownValueError:
+                    text = ""
+                except sr.RequestError as e:
+                    rospy.logerr("Kaldi error; {0}".format(e))
+                    text = ""
 
                 rospy.loginfo("I heard: " + text)
 
@@ -98,8 +123,16 @@ def voice_control():
                         # Enregistrement audio de la réponse de l'utilisateur
                         audio_file = record_audio()
 
-                        # Transcription de la parole en texte
-                        text = speech_to_text(audio_file)
+                        # Transcription de la parole en texte avec Kaldi
+                        with sr.AudioFile(audio_file) as source:
+                            audio = r.record(source)
+                        try:
+                            text = r.recognize_kaldi(audio)
+                        except sr.UnknownValueError:
+                            text = ""
+                        except sr.RequestError as e:
+                            rospy.logerr("Kaldi error; {0}".format(e))
+                            text = ""
 
                         if "yes" in text.lower():
                             # Message à dire pour indiquer que le robot exécute la commande
@@ -108,26 +141,26 @@ def voice_control():
                             # On génère la complétion avec l'API de ChatGPT
                             prompt = text # On récupère la commande dans une variable
                             # On génère la complétion avec l'API de ChatGPT
-                            api_key = "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" # Remplacer par votre clé API
-                            headers = {
-                                "Content-Type": "application/json",
-                                "Authorization": "Bearer " + api_key
-                            }
-                            data = {
-                                "prompt": prompt,
-                                "temperature": 0.7,
-                                "max_tokens": 60,
-                                "stop": ["\n"]
-                            }
-                            response = requests.post("https://api.openai.com/v1/engines/davinci-codex/completions", json=data, headers=headers)
+                            # api_key = "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" # Remplacer par votre clé API
+                            # headers = {
+                            #    "Content-Type": "application/json",
+                            #    "Authorization": "Bearer " + api_key
+                            #}
+                            #data = {
+                            #    "prompt": prompt,
+                            #    "temperature": 0.7,
+                            #    "max_tokens": 60,
+                            #    "stop": ["\n"]
+                            #}
+                            #response = requests.post("https://api.openai.com/v1/engines/davinci-codex/completions", json=data, headers=headers)
                             # On récupère la réponse de l'API et on la met en forme
-                            if response.ok:
-                                text = response.json()["choices"][0]["text"].strip()
-                                text = re.sub(r'\s+', ' ', text) # On enlève les espaces inutiles
+                            #if response.ok:
+                            #    text = response.json()["choices"][0]["text"].strip()
+                            #    text = re.sub(r'\s+', ' ', text) # On enlève les espaces inutiles
                                 # On utilise la fonction text_to_speech pour dire la réponse
-                                text_to_speech(text)
-                            else:
-                                rospy.logerr("An error occurred while calling the ChatGPT API")
+                            #    text_to_speech(text)
+                            #else:
+                            #    rospy.logerr("An error occurred while calling the ChatGPT API")
                             break
                         elif "no" in text.lower():
                             # Message à dire pour indiquer que le robot demande la commande à nouveau
